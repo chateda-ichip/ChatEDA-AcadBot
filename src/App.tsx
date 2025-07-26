@@ -5,7 +5,7 @@ export default defineComponent({
     name: 'App',
     setup() {
         return () => (
-            <div class="w-full h-full min-h-screen bg-white dark:bg-slate-900">
+            <div class="w-full h-full bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 overflow-y-auto">
                 <RouterView />
             </div>
         )

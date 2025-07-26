@@ -1,6 +1,6 @@
 module.exports = {
     darkMode: "class", // or 'media'
-    content: ["./src/**/*.{html,ts}"], // Make sure paths are correct
+    content: ["./src/**/*.{html,js,ts,jsx,tsx,vue}"], // Make sure paths are correct
     theme: {
         extend: {},
     },
