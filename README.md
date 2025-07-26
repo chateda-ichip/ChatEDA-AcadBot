@@ -29,7 +29,7 @@ ChatEDA-AcadBot is a modern plugin designed for academic conference submission, 
 ## TODO
 
 - 📝 Submission review and acceptance tracking
-- 👥 Team Collaboration: multi-user support, task assignment, and
+- 👥 Team Collaboration: multi-user support, task assignment, and progress sharing
 
 ---
 
@@ -62,7 +62,6 @@ We welcome contributions from the community! Please read our [Contributing Guide
 4. Push to your branch (`git push origin feature/your-feature`)
 5. Open a Pull Request
 
-
 ---
 
 ## License
@@ -72,3 +71,9 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ---
 
 **Empowering smarter academic conference management—join us**
+
+---
+
+## Follow Us
+
+For more insights, discussions, and updates on EDA and academic conferences, follow our WeChat public account: **EDA茶话会**.
