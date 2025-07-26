@@ -60,6 +60,7 @@ export default defineConfig({
                 }
             ]
         }),
+        // TODO:  optimize firefox add-on package size
         // createFirefoxPackage()
     ],
     resolve: {
