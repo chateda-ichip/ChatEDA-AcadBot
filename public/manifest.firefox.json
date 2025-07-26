@@ -1,0 +1,39 @@
+{
+    "manifest_version": 2,
+    "name": "ChatEDA AcadBot",
+    "version": "1.0.0",
+    "description": "Conference Submission & Attendance Helper",
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "chateda-helper@example.com",
+            "strict_min_version": "57.0"
+        }
+    },
+    "browser_action": {
+        "default_popup": "index.html",
+        "default_icon": {
+            "16": "icons/chateda-16.png",
+            "32": "icons/chateda-32.png",
+            "48": "icons/chateda-48.png",
+            "128": "icons/chateda-128.png"
+        }
+    },
+    "icons": {
+        "16": "icons/chateda-16.png",
+        "32": "icons/chateda-32.png",
+        "48": "icons/chateda-48.png",
+        "128": "icons/chateda-128.png"
+    },
+    "permissions": [
+        "storage",
+        "alarms",
+        "notifications",
+        "https://api.github.com/*",
+        "https://raw.githubusercontent.com/*"
+    ],
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    }
+}
