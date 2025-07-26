@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+dist-firefox
 *.local
 
 # Editor directories and files
@@ -25,3 +26,15 @@ dist-ssr
 
 *.pyc
 __pycache__
+
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+*.bz2
+*.xz
+*.tgz
+*.tar.gz
+*.tar.bz2
+*.tar.xz
