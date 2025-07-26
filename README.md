@@ -5,6 +5,12 @@
 
 ---
 
+> **Note:**  
+> The backend data for this project is maintained in [ConfTrack](https://github.com/chateda-ichip/ConfTrack).  
+> If you are interested in this tool, we welcome you to contribute and help maintain both the frontend and backend!
+
+---
+
 ## Project Overview
 
 ChatEDA-AcadBot is a modern plugin designed for academic conference submission, paper management, and attendance tracking. It helps researchers, students, and teams efficiently manage submission progress, conference schedules, paper statuses, and more—boosting academic collaboration and productivity.
