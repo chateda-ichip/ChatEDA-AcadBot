@@ -14,10 +14,16 @@ ChatEDA-AcadBot is a modern plugin designed for academic conference submission, 
 ## Key Features
 
 - 📅 **Conference Schedule Management**: Automatically sync and remind important conference deadlines
-- 📝 **Submission Progress Tracking**: Record paper submission, review, acceptance, and other status updates
-- 👥 **Team Collaboration**: Support for multi-user collaboration, task assignment, and progress sharing
+- 📝 **Submission Progress Tracking**: Record paper submission status
 - 🔔 **Smart Reminders**: Automatic notifications for key milestones to avoid missing important deadlines
 - 📊 **Data Visualization**: Visualize submission and attendance data for better insights
+
+---
+
+## TODO
+
+- 📝 Submission review and acceptance tracking
+- 👥 Team Collaboration: multi-user support, task assignment, and
 
 ---
 
