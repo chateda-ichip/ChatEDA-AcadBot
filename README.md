@@ -59,4 +59,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ---
 
-**Empowering smarter academic conference management—join us
+**Empowering smarter academic conference management—join us**
