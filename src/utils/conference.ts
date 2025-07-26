@@ -1,21 +1,16 @@
 import * as yamlLib from 'js-yaml'
 const yaml = yamlLib as any
 
-export interface TimelineItem {
-    name: string
-    deadline: string
-}
 
 export interface ConferenceYear {
     year: number
     id?: string
     date: string
     place: string
-    abstractDeadline?: string
+    abstractDeadline: string
     deadline: string
     link?: string
     timezone?: string
-    timeline?: TimelineItem[]
 }
 
 export interface Conference {
@@ -95,8 +90,8 @@ export async function loadConferences(): Promise<Conference[]> {
                                                 id: year.id,
                                                 date: year.date,
                                                 place: year.place,
-                                                deadline: year.timeline?.[0]?.deadline || year.deadline,
-                                                abstractDeadline: year.timeline?.[0]?.abstract_deadline,
+                                                abstractDeadline: year.abstract_deadline,
+                                                deadline: year.deadline,
                                                 link: year.link,
                                                 timezone: year.timezone
                                             }))

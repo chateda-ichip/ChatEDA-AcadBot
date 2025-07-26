@@ -193,8 +193,9 @@ export default defineComponent({
                 today.setHours(0, 0, 0, 0)
                 return date.getTime() < today.getTime()
             } catch (err) {
-                console.error("Error in checking if date has been missed:", err, dateStr)
-                return false
+                // console.error("Error in checking if date has been missed:", err, dateStr)
+                // return false
+                return 'Not Specified'
             }
         }
 
@@ -264,6 +265,10 @@ export default defineComponent({
                 const today = new Date()
                 today.setHours(0, 0, 0, 0)
 
+                const abstract_deadlineStr = conference.years[0].abstractDeadline.replace(/['"]/g, '').trim()
+                const abstract_deadlineDate = new Date(abstract_deadlineStr)
+                abstract_deadlineDate.setHours(0, 0, 0, 0)
+
                 const deadlineStr = conference.years[0].deadline.replace(/['"]/g, '').trim()
                 const deadlineDate = new Date(deadlineStr)
                 deadlineDate.setHours(0, 0, 0, 0)
@@ -276,6 +281,8 @@ export default defineComponent({
                     return 'Ended'
                 } else if (today.getTime() === confDate.getTime()) {
                     return 'Ongoing'
+                } else if (today.getTime() >= abstract_deadlineDate.getTime()) {
+                    return 'Abstract Submission Deadline'
                 } else if (today.getTime() >= deadlineDate.getTime()) {
                     return 'Submission Deadline'
                 } else {
@@ -395,7 +402,7 @@ export default defineComponent({
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="flex flex-wrap gap-2 sm:gap-3 md:gap-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
                         <div class="flex items-center gap-1 sm:gap-2">
                             <ElIcon class="text-green-600 text-xs sm:text-sm"><Check /></ElIcon>
@@ -469,9 +476,9 @@ export default defineComponent({
                                 size="small"
                                 class="w-full sm:max-w-md text-sm"
                             />
-                            
+
                             <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 text-center sm:text-left bg-slate-50 dark:bg-slate-700/50 px-2 sm:px-3 py-1 sm:py-1.5 rounded">
-                                <span class="font-medium text-blue-600 dark:text-blue-400">{selectedCategories.value.length}</span> categories, 
+                                <span class="font-medium text-blue-600 dark:text-blue-400">{selectedCategories.value.length}</span> categories,
                                 <span class="font-medium text-green-600 dark:text-green-400 ml-1">{filteredConferences.value.length}</span> found
                             </div>
                         </div>
@@ -524,14 +531,14 @@ export default defineComponent({
                                                 <div class="flex items-center gap-2 sm:gap-3 flex-wrap mb-3">
                                                     <div class="flex flex-col">
                                                         <h2 class={`text-lg sm:text-xl md:text-2xl font-bold leading-tight ${isConferenceOver ? 'line-through text-slate-500' : 'text-slate-900 dark:text-white'}`}>
-                                                            {conf.title} 
+                                                            {conf.title}
                                                             <span class="text-blue-600 dark:text-blue-400 ml-1 sm:ml-2 font-semibold">
                                                                 {latestYear.year}
                                                             </span>
                                                         </h2>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="flex items-center gap-2 flex-wrap mb-3">
                                                     <ElTag type={statusType} size="large" effect="dark" class="px-2 sm:px-3 py-1 font-medium">
                                                         {statusText}
@@ -545,7 +552,7 @@ export default defineComponent({
                                                         </ElTag>
                                                     )}
                                                 </div>
-                                                
+
                                                 <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
                                                     {conf.description}
                                                 </p>
@@ -571,21 +578,6 @@ export default defineComponent({
                                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                                                 <div class="space-y-3">
                                                     <div class="flex items-start gap-3">
-                                                        <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center flex-shrink-0">
-                                                            <ElIcon class="text-blue-600 dark:text-blue-400"><Calendar /></ElIcon>
-                                                        </div>
-                                                        <div class="flex-1 min-w-0">
-                                                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Conference Date:</span>
-                                                            <div class="text-base font-semibold text-slate-900 dark:text-white">{formatDate(latestYear.date)}</div>
-                                                            {isUpcoming(latestYear.date) && (
-                                                                <ElTag size="small" type="info" class="mt-1">
-                                                                    {getDaysToConference(latestYear.date)} days remaining
-                                                                </ElTag>
-                                                            )}
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="flex items-start gap-3">
                                                         <div class="w-10 h-10 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center flex-shrink-0">
                                                             <ElIcon class="text-green-600 dark:text-green-400"><MapLocation /></ElIcon>
                                                         </div>
@@ -594,41 +586,8 @@ export default defineComponent({
                                                             <div class="text-base font-semibold text-slate-900 dark:text-white">{latestYear.place}</div>
                                                         </div>
                                                     </div>
-
-                                                    <div class="flex items-start gap-3">
-                                                        <div class={`w-10 h-10 ${isDeadlineOver ? 'bg-red-100 dark:bg-red-900/50' : 'bg-orange-100 dark:bg-orange-900/50'} rounded-lg flex items-center justify-center flex-shrink-0`}>
-                                                            <ElIcon class={isDeadlineOver ? 'text-red-600 dark:text-red-400' : 'text-orange-600 dark:text-orange-400'}><Clock /></ElIcon>
-                                                        </div>
-                                                        <div class="flex-1 min-w-0">
-                                                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Submission Deadline:</span>
-                                                            <div class={`text-base font-semibold ${isDeadlineOver ? 'text-red-600 dark:text-red-400 line-through' : 'text-slate-900 dark:text-white'}`}>
-                                                                {formatDate(latestYear.deadline)}
-                                                            </div>
-                                                            {!isDeadlineOver && daysRemaining !== null && (
-                                                                <ElTag 
-                                                                    size="small" 
-                                                                    type={daysRemaining <= 7 ? 'danger' : daysRemaining <= 30 ? 'warning' : 'success'}
-                                                                    class="mt-1"
-                                                                >
-                                                                    {daysRemaining > 0 ? `${daysRemaining} days left` : 'Due today!'}
-                                                                </ElTag>
-                                                            )}
-                                                        </div>
-                                                    </div>
                                                 </div>
                                                 <div class="space-y-3">
-                                                    <div class="flex items-start gap-3">
-                                                        <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center flex-shrink-0">
-                                                            <ElIcon class="text-purple-600 dark:text-purple-400"><Document /></ElIcon>
-                                                        </div>
-                                                        <div class="flex-1 min-w-0">
-                                                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Abstract Deadline:</span>
-                                                            <div class="text-base font-semibold text-slate-900 dark:text-white">
-                                                                {latestYear.abstractDeadline ? formatDate(latestYear.abstractDeadline) : 'Not specified'}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    
                                                     {/* Timeline */}
                                                     <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
                                                         <h4 class="text-sm font-medium mb-3 flex items-center">
@@ -675,7 +634,7 @@ export default defineComponent({
                                                                         </span>
                                                                     </p>
                                                                 </ElTimelineItem>
-                                                                {latestYear.timeline?.map((item, index) => {
+                                                                {/* {latestYear.timeline?.map((item, index) => {
                                                                     const isPastDeadline = isDatePassed(item.deadline);
                                                                     return (
                                                                         <ElTimelineItem
@@ -692,7 +651,7 @@ export default defineComponent({
                                                                             </p>
                                                                         </ElTimelineItem>
                                                                     );
-                                                                })}
+                                                                })} */}
                                                             </ElTimeline>
                                                         </div>
                                                     </div>
