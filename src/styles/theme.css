@@ -1,11 +1,44 @@
 @import "tailwindcss";
 
-/* src/styles/theme.css */
+/* Custom styles for ChatEDA-AcadBot */
 
-/* add your theme style here */
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
 
-/* for example */
-body {
-    font-family: sans-serif;
-    background-color: #f0f0f0;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: #475569;
+}
+
+/* Focus styles */
+*:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Glass effect for cards */
+.glass-effect {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass-effect {
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid rgba(51, 65, 85, 0.3);
 }

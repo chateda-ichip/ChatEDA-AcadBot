@@ -369,62 +369,105 @@ export default defineComponent({
         })
 
         return () => (
-            <div class="conference-view">
-                <div class="header">
-                    <h1 class="title">
-                        ChatEDA-AcadBot
-                    </h1>
-                    <p class="description">
-                        Conference Submission & Attendance Helper
-                    </p>
+            <div class="max-w-6xl mx-auto p-4 md:p-8 min-h-screen">
+                {/* 现代化的标题区域 */}
+                <div class="header-section bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 rounded-xl mb-8 p-8 border border-slate-200/50 dark:border-slate-700/50">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                                <ElIcon size="24" class="text-white">
+                                    <Document />
+                                </ElIcon>
+                            </div>
+                            <div>
+                                <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent leading-tight">
+                                    ChatEDA-AcadBot
+                                </h1>
+                                <p class="text-slate-600 dark:text-slate-300 text-lg mt-1">
+                                    Conference Submission & Attendance Helper
+                                </p>
+                            </div>
+                        </div>
+                        <div class="hidden md:flex flex-col items-end text-right">
+                            <div class="text-sm text-slate-500 dark:text-slate-400 mb-1">
+                                Total Conferences
+                            </div>
+                            <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                                {conferences.value.length}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4 text-sm text-slate-600 dark:text-slate-300">
+                        <div class="flex items-center gap-2">
+                            <ElIcon class="text-green-600"><Check /></ElIcon>
+                            <span>Real-time Updates</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <ElIcon class="text-blue-600"><Star /></ElIcon>
+                            <span>Subscription Management</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <ElIcon class="text-purple-600"><Timer /></ElIcon>
+                            <span>Deadline Tracking</span>
+                        </div>
+                    </div>
+                </div>
 
-                    {/* Search and filter areas */}
-                    <div class="filter-section bg-white dark:bg-slate-800 rounded-lg p-4 shadow-sm mb-6">
-                        <div class="flex flex-col gap-4">
-                            <div class="flex items-center justify-between">
-                                <h3 class="text-sm font-medium text-slate-700 dark:text-slate-300">Conference Category</h3>
-                                <ElButton
-                                    type="text"
-                                    size="small"
-                                    onClick={toggleAllCategories}
-                                    class="!text-xs"
+                {/* Search and filter areas */}
+                <div class="filter-section bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200/50 dark:border-slate-700/50 mb-8">
+                    <div class="flex flex-col gap-6">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <ElIcon class="text-slate-600 dark:text-slate-400"><InfoFilled /></ElIcon>
+                                <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200">Filter & Search</h3>
+                            </div>
+                            <ElButton
+                                type="text"
+                                size="small"
+                                onClick={toggleAllCategories}
+                                class="!text-sm !text-blue-600 dark:!text-blue-400 hover:!bg-blue-50 dark:hover:!bg-blue-900/20 !px-3 !py-1.5 !rounded-lg !font-medium"
+                            >
+                                {selectedCategories.value.length === categoryOptions.length ? 'Deselect All' : 'Select All'}
+                            </ElButton>
+                        </div>
+
+                        <div class="flex flex-wrap gap-3">
+                            {categoryOptions.map(category => (
+                                <ElTag
+                                    key={category}
+                                    class={`category-tag cursor-pointer transition-all duration-200 hover:scale-105 ${selectedCategories.value.includes(category) ? 'selected' : ''}`}
+                                    effect="plain"
+                                    size="large"
+                                    onClick={() => {
+                                        if (selectedCategories.value.includes(category)) {
+                                            selectedCategories.value = selectedCategories.value.filter(c => c !== category)
+                                        } else {
+                                            selectedCategories.value = [...selectedCategories.value, category]
+                                        }
+                                    }}
                                 >
-                                    {selectedCategories.value.length === categoryOptions.length ? 'Deselect All' : 'Select All'}
-                                </ElButton>
-                            </div>
+                                    <span class="font-medium">{category}</span>
+                                    {selectedCategories.value.includes(category) && (
+                                        <ElIcon class="ml-2 text-green-600"><Check /></ElIcon>
+                                    )}
+                                </ElTag>
+                            ))}
+                        </div>
 
-                            <div class="flex flex-wrap gap-2">
-                                {categoryOptions.map(category => (
-                                    <ElTag
-                                        key={category}
-                                        class={`category-tag cursor-pointer transition-all ${selectedCategories.value.includes(category) ? 'selected' : ''}`}
-                                        effect="plain"
-                                        onClick={() => {
-                                            if (selectedCategories.value.includes(category)) {
-                                                selectedCategories.value = selectedCategories.value.filter(c => c !== category)
-                                            } else {
-                                                selectedCategories.value = [...selectedCategories.value, category]
-                                            }
-                                        }}
-                                    >
-                                        {category}
-                                        {selectedCategories.value.includes(category) && (
-                                            <ElIcon class="ml-1"><Check /></ElIcon>
-                                        )}
-                                    </ElTag>
-                                ))}
-                            </div>
-
+                        <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
                             <ElInput
                                 v-model={searchQuery.value}
                                 placeholder="Search for conference ID, title, or description..."
                                 class="!max-w-md"
                                 clearable
                                 prefix-icon={Search}
+                                size="large"
                             />
-
-                            <div class="text-xs text-slate-500 dark:text-slate-400">
-                                {selectedCategories.value.length} categories selected, {filteredConferences.value.length} total conferences
+                            
+                            <div class="text-sm text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg">
+                                <span class="font-medium text-blue-600 dark:text-blue-400">{selectedCategories.value.length}</span> categories selected, 
+                                <span class="font-medium text-green-600 dark:text-green-400 ml-1">{filteredConferences.value.length}</span> conferences found
                             </div>
                         </div>
                     </div>
@@ -466,47 +509,55 @@ export default defineComponent({
                             return (
                                 <ElCard
                                     key={conf.title}
-                                    class={`conference-card ${isConferenceOver ? 'opacity-70' : ''}`}
+                                    class={`group transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border-0 shadow-lg bg-gradient-to-br from-white to-slate-50/50 dark:from-slate-800 dark:to-slate-900/50 backdrop-blur-sm ${isConferenceOver ? 'opacity-60' : ''}`}
                                     shadow="hover"
                                 >
                                     <div class="flex flex-col">
                                         {/* Conference title and status */}
-                                        <div class="flex justify-between items-start mb-4">
+                                        <div class="flex justify-between items-start mb-6">
                                             <div class="flex-1">
-                                                <div class="flex items-center gap-2 flex-wrap">
+                                                <div class="flex items-center gap-3 flex-wrap mb-3">
                                                     <div class="flex flex-col">
                                                         {false && getConferenceId(conf) && (
-                                                            <span class="text-xs font-mono text-slate-500 dark:text-slate-400 mb-1">
+                                                            <span class="text-xs font-mono text-slate-500 dark:text-slate-400 mb-1 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded">
                                                                 {getConferenceId(conf)}
                                                             </span>
                                                         )}
-                                                        <h2 class={`text-xl font-bold ${isConferenceOver ? 'line-through text-slate-500' : 'text-slate-900 dark:text-white'}`}>
-                                                            {conf.title} {latestYear.year}
+                                                        <h2 class={`text-2xl font-bold leading-tight ${isConferenceOver ? 'line-through text-slate-500' : 'text-slate-900 dark:text-white'}`}>
+                                                            {conf.title} 
+                                                            <span class="text-blue-600 dark:text-blue-400 ml-2 font-semibold">
+                                                                {latestYear.year}
+                                                            </span>
                                                         </h2>
                                                     </div>
-                                                    <ElTag type={statusType} size="small" effect="dark" class="ml-2">
+                                                </div>
+                                                
+                                                <div class="flex items-center gap-2 flex-wrap mb-3">
+                                                    <ElTag type={statusType} size="large" effect="dark" class="px-3 py-1 font-medium">
                                                         {statusText}
                                                     </ElTag>
-                                                    <ElTag type="info" size="small" effect="plain">
+                                                    <ElTag type="info" size="default" effect="plain" class="bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700/50">
                                                         {conf.sub}
                                                     </ElTag>
                                                     {conf.rank && (
-                                                        <ElTag type="warning" size="small" effect="plain">
+                                                        <ElTag type="warning" size="default" effect="plain" class="bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/30 dark:text-amber-300 dark:border-amber-700/50">
                                                             {conf.rank}
                                                         </ElTag>
                                                     )}
                                                 </div>
-                                                <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">
+                                                
+                                                <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
                                                     {conf.description}
                                                 </p>
                                             </div>
-                                            <div class="flex items-center gap-2">
+                                            <div class="flex items-center gap-2 ml-4">
                                                 <ElButton
                                                     type={isSubscribed ? 'success' : 'primary'}
-                                                    size="small"
+                                                    size="default"
                                                     onClick={() => handleSubscription(conf, latestYear)}
+                                                    class="px-4 py-2 font-medium shadow-md hover:shadow-lg transition-all duration-200"
                                                 >
-                                                    <ElIcon class="mr-1">
+                                                    <ElIcon class="mr-2">
                                                         {isSubscribed ? <Star /> : <Star />}
                                                     </ElIcon>
                                                     {isSubscribed ? 'Subscribed' : 'Subscribe'}
@@ -515,137 +566,191 @@ export default defineComponent({
                                         </div>
 
                                         {/* Conference details */}
-                                        <div class="bg-slate-50 dark:bg-slate-800 rounded-lg p-4 mb-4">
-                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                <div class="space-y-2">
-                                                    <div class="flex items-center gap-2">
-                                                        <ElIcon><Calendar /></ElIcon>
-                                                        <span class="text-sm font-medium">Conference Time:</span>
-                                                        <span class="text-sm">{formatDate(latestYear.date)}</span>
-                                                        {isUpcoming(latestYear.date) && (
-                                                            <ElTag size="small" type="info">
-                                                                Countdown: {getDaysToConference(latestYear.date)} days
-                                                            </ElTag>
-                                                        )}
-                                                    </div>
-                                                    <div class="flex items-center gap-2">
-                                                        <ElIcon><MapLocation /></ElIcon>
-                                                        <span class="text-sm font-medium">Location:</span>
-                                                        <span class="text-sm">{latestYear.place}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="space-y-2">
-                                                    <div class="flex items-center gap-2">
-                                                        <ElIcon><Clock /></ElIcon>
-                                                        <span class="text-sm font-medium">Deadline:</span>
-                                                        <span class="text-sm">{formatDate(latestYear.deadline)}</span>
-                                                        {daysRemaining > 0 && (
-                                                            <ElTag size="small" type="danger">
-                                                                Only {daysRemaining} days left!
-                                                            </ElTag>
-                                                        )}
-                                                    </div>
-                                                    {latestYear.abstractDeadline && (
-                                                        <div class="flex items-center gap-2">
-                                                            <ElIcon><Document /></ElIcon>
-                                                            <span class="text-sm font-medium">Abstract Deadline:</span>
-                                                            <span class="text-sm">{formatDate(latestYear.abstractDeadline)}</span>
+                                        <div class="bg-gradient-to-r from-slate-50/80 to-blue-50/30 dark:from-slate-800/50 dark:to-slate-700/30 rounded-xl p-5 mb-6 border border-slate-200/50 dark:border-slate-600/30">
+                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                <div class="space-y-3">
+                                                    <div class="flex items-center gap-3">
+                                                        <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center">
+                                                            <ElIcon class="text-blue-600 dark:text-blue-400"><Calendar /></ElIcon>
                                                         </div>
-                                                    )}
-                                                </div>
-                                            </div>
+                                                        <div>
+                                                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Conference Date:</span>
+                                                            <div class="text-base font-semibold text-slate-900 dark:text-white">{formatDate(latestYear.date)}</div>
+                                                            {isUpcoming(latestYear.date) && (
+                                                                <ElTag size="small" type="info" class="mt-1">
+                                                                    {getDaysToConference(latestYear.date)} days remaining
+                                                                </ElTag>
+                                                            )}
+                                                        </div>
+                                                    </div>
 
-                                            {/* Timeline */}
-                                            <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
-                                                <h4 class="text-sm font-medium mb-3 flex items-center">
-                                                    <ElIcon class="mr-1"><InfoFilled /></ElIcon>
-                                                    Important Dates
-                                                </h4>
-                                                <ElTimeline>
-                                                    {latestYear.abstractDeadline && (
-                                                        <ElTimelineItem
-                                                            type={getTimelineItemType(latestYear.abstractDeadline)}
-                                                            size="large"
-                                                            hollow={!isDatePassed(latestYear.abstractDeadline)}
-                                                        >
-                                                            <p class={`text-sm ${isDatePassed(latestYear.abstractDeadline) ? 'opacity-70' : ''}`}>
-                                                                <span class="font-medium">Abstract Deadline:</span>{' '}
-                                                                <span class={isDatePassed(latestYear.abstractDeadline) ? 'line-through' : ''}>
-                                                                    {formatDate(latestYear.abstractDeadline)}
-                                                                </span>
-                                                            </p>
-                                                        </ElTimelineItem>
-                                                    )}
-                                                    <ElTimelineItem
-                                                        type={getTimelineItemType(latestYear.deadline)}
-                                                        size="large"
-                                                        hollow={!isDatePassed(latestYear.deadline)}
-                                                    >
-                                                        <p class={`text-sm ${isDatePassed(latestYear.deadline) ? 'opacity-70' : ''}`}>
-                                                            <span class="font-medium">Submission Deadline:</span>{' '}
-                                                            <span class={isDatePassed(latestYear.deadline) ? 'line-through' : ''}>
+                                                    <div class="flex items-center gap-3">
+                                                        <div class="w-8 h-8 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center">
+                                                            <ElIcon class="text-green-600 dark:text-green-400"><MapLocation /></ElIcon>
+                                                        </div>
+                                                        <div>
+                                                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Location:</span>
+                                                            <div class="text-base font-semibold text-slate-900 dark:text-white">{latestYear.place}</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="flex items-center gap-3">
+                                                        <div class={`w-8 h-8 ${isDeadlineOver ? 'bg-red-100 dark:bg-red-900/50' : 'bg-orange-100 dark:bg-orange-900/50'} rounded-lg flex items-center justify-center`}>
+                                                            <ElIcon class={isDeadlineOver ? 'text-red-600 dark:text-red-400' : 'text-orange-600 dark:text-orange-400'}><Clock /></ElIcon>
+                                                        </div>
+                                                        <div>
+                                                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Submission Deadline:</span>
+                                                            <div class={`text-base font-semibold ${isDeadlineOver ? 'text-red-600 dark:text-red-400 line-through' : 'text-slate-900 dark:text-white'}`}>
                                                                 {formatDate(latestYear.deadline)}
-                                                            </span>
-                                                        </p>
-                                                    </ElTimelineItem>
-                                                    <ElTimelineItem
-                                                        type={getTimelineItemType(latestYear.date)}
-                                                        size="large"
-                                                        hollow={!isDatePassed(latestYear.date)}
-                                                    >
-                                                        <p class={`text-sm ${isDatePassed(latestYear.date) ? 'opacity-70' : ''}`}>
-                                                            <span class="font-medium">Conference Time:</span>{' '}
-                                                            <span class={isDatePassed(latestYear.date) ? 'line-through' : ''}>
-                                                                {formatDate(latestYear.date)}
-                                                            </span>
-                                                        </p>
-                                                    </ElTimelineItem>
-                                                    {latestYear.timeline?.map((item, index) => {
-                                                        const isPastDeadline = isDatePassed(item.deadline);
-                                                        return (
-                                                            <ElTimelineItem
-                                                                key={index}
-                                                                type={getTimelineItemType(item.deadline)}
-                                                                size="large"
-                                                                hollow={!isDatePassed(item.deadline)}
-                                                            >
-                                                                <p class={`text-sm ${isPastDeadline ? 'opacity-70' : ''}`}>
-                                                                    <span class="font-medium">{item.name}:</span>{' '}
-                                                                    <span class={isPastDeadline ? 'line-through' : ''}>
-                                                                        {formatDate(item.deadline)}
-                                                                    </span>
-                                                                </p>
-                                                            </ElTimelineItem>
-                                                        );
-                                                    })}
-                                                </ElTimeline>
+                                                            </div>
+                                                            {!isDeadlineOver && daysRemaining !== null && (
+                                                                <ElTag 
+                                                                    size="small" 
+                                                                    type={daysRemaining <= 7 ? 'danger' : daysRemaining <= 30 ? 'warning' : 'success'}
+                                                                    class="mt-1"
+                                                                >
+                                                                    {daysRemaining > 0 ? `${daysRemaining} days left` : 'Due today!'}
+                                                                </ElTag>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="space-y-3">
+                                                    <div class="flex items-center gap-3">
+                                                        <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center">
+                                                            <ElIcon class="text-purple-600 dark:text-purple-400"><Document /></ElIcon>
+                                                        </div>
+                                                        <div>
+                                                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Abstract Deadline:</span>
+                                                            <div class="text-base font-semibold text-slate-900 dark:text-white">
+                                                                {latestYear.abstractDeadline ? formatDate(latestYear.abstractDeadline) : 'Not specified'}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex items-center gap-3">
+                                                        <div class="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/50 rounded-lg flex items-center justify-center">
+                                                            <ElIcon class="text-indigo-600 dark:text-indigo-400"><InfoFilled /></ElIcon>
+                                                        </div>
+                                                        <div>
+                                                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Timeline:</span>
+                                                            <ElTimeline>
+                                                                {latestYear.abstractDeadline && (
+                                                                    <ElTimelineItem
+                                                                        type={getTimelineItemType(latestYear.abstractDeadline)}
+                                                                        size="large"
+                                                                        hollow={!isDatePassed(latestYear.abstractDeadline)}
+                                                                    >
+                                                                        <p class={`text-sm ${isDatePassed(latestYear.abstractDeadline) ? 'opacity-70' : ''}`}>
+                                                                            <span class="font-medium">Abstract Deadline:</span>{' '}
+                                                                            <span class={isDatePassed(latestYear.abstractDeadline) ? 'line-through' : ''}>
+                                                                                {formatDate(latestYear.abstractDeadline)}
+                                                                            </span>
+                                                                        </p>
+                                                                    </ElTimelineItem>
+                                                                )}
+                                                                <ElTimelineItem
+                                                                    type={getTimelineItemType(latestYear.deadline)}
+                                                                    size="large"
+                                                                    hollow={!isDatePassed(latestYear.deadline)}
+                                                                >
+                                                                    <p class={`text-sm ${isDatePassed(latestYear.deadline) ? 'opacity-70' : ''}`}>
+                                                                        <span class="font-medium">Submission Deadline:</span>{' '}
+                                                                        <span class={isDatePassed(latestYear.deadline) ? 'line-through' : ''}>
+                                                                            {formatDate(latestYear.deadline)}
+                                                                        </span>
+                                                                    </p>
+                                                                </ElTimelineItem>
+                                                                <ElTimelineItem
+                                                                    type={getTimelineItemType(latestYear.date)}
+                                                                    size="large"
+                                                                    hollow={!isDatePassed(latestYear.date)}
+                                                                >
+                                                                    <p class={`text-sm ${isDatePassed(latestYear.date) ? 'opacity-70' : ''}`}>
+                                                                        <span class="font-medium">Conference Time:</span>{' '}
+                                                                        <span class={isDatePassed(latestYear.date) ? 'line-through' : ''}>
+                                                                            {formatDate(latestYear.date)}
+                                                                        </span>
+                                                                    </p>
+                                                                </ElTimelineItem>
+                                                                {latestYear.timeline?.map((item, index) => {
+                                                                    const isPastDeadline = isDatePassed(item.deadline);
+                                                                    return (
+                                                                        <ElTimelineItem
+                                                                            key={index}
+                                                                            type={getTimelineItemType(item.deadline)}
+                                                                            size="large"
+                                                                            hollow={!isDatePassed(item.deadline)}
+                                                                        >
+                                                                            <p class={`text-sm ${isPastDeadline ? 'opacity-70' : ''}`}>
+                                                                                <span class="font-medium">{item.name}:</span>{' '}
+                                                                                <span class={isPastDeadline ? 'line-through' : ''}>
+                                                                                    {formatDate(item.deadline)}
+                                                                                </span>
+                                                                            </p>
+                                                                        </ElTimelineItem>
+                                                                    );
+                                                                })}
+                                                            </ElTimeline>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex items-center gap-3">
+                                                        <div class="w-8 h-8 bg-teal-100 dark:bg-teal-900/50 rounded-lg flex items-center justify-center">
+                                                            <ElIcon class="text-teal-600 dark:text-teal-400"><Link /></ElIcon>
+                                                        </div>
+                                                        <div>
+                                                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Official Site:</span>
+                                                            {latestYear.link && (
+                                                                <a href={latestYear.link} target="_blank" rel="noopener noreferrer" class="text-base font-semibold text-slate-900 dark:text-white hover:underline">
+                                                                    {latestYear.link}
+                                                                </a>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex items-center gap-3">
+                                                        <div class="w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
+                                                            <ElIcon class="text-gray-600 dark:text-gray-400"><Document /></ElIcon>
+                                                        </div>
+                                                        <div>
+                                                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">DBLP:</span>
+                                                            {conf.dblp && (
+                                                                <a href={`https://dblp.org/db/conf/${conf.dblp}/index.html`} target="_blank" rel="noopener noreferrer" class="text-base font-semibold text-slate-900 dark:text-white hover:underline">
+                                                                    {conf.dblp}
+                                                                </a>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
                                         {/* Action Button */}
-                                        <div class="flex justify-between items-center">
-                                            <div class="flex items-center gap-2">
+                                        <div class="flex justify-between items-center pt-4 border-t border-slate-200/50 dark:border-slate-700/50">
+                                            <div class="flex items-center gap-3">
                                                 {latestYear.link && (
                                                     <ElButton
                                                         type="primary"
-                                                        size="small"
+                                                        size="default"
                                                         onClick={() => window.open(latestYear.link, '_blank')}
+                                                        class="shadow-md hover:shadow-lg transition-all duration-200"
                                                     >
-                                                        <ElIcon class="mr-1"><Link /></ElIcon>
+                                                        <ElIcon class="mr-2"><Link /></ElIcon>
                                                         Official Site
                                                     </ElButton>
                                                 )}
                                                 {conf.dblp && (
                                                     <ElButton
                                                         type="info"
-                                                        size="small"
+                                                        size="default"
                                                         onClick={() => window.open(`https://dblp.org/db/conf/${conf.dblp}/index.html`, '_blank')}
+                                                        class="shadow-md hover:shadow-lg transition-all duration-200"
                                                     >
+                                                        <ElIcon class="mr-2"><Document /></ElIcon>
                                                         DBLP
                                                     </ElButton>
                                                 )}
                                             </div>
-                                            <div class="text-xs text-slate-500 dark:text-slate-400">
+                                            <div class="text-sm text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-700/50 px-3 py-1.5 rounded-lg">
+                                                <ElIcon class="mr-1 text-xs"><Timer /></ElIcon>
                                                 Last Updated: {new Date().toLocaleDateString()}
                                             </div>
                                         </div>
@@ -657,73 +762,5 @@ export default defineComponent({
                 )}
             </div>
         );
-    },
-    styles: [
-        `
-        .conference-view {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-        .header {
-            margin-bottom: 2rem;
-        }
-        .title {
-            font-size: 1.875rem;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 1rem;
-        }
-        .description {
-            color: #64748b;
-            margin-bottom: 1.5rem;
-        }
-        .conference-card {
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
-        }
-        .conference-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        @media (prefers-color-scheme: dark) {
-            .title {
-                color: #f8fafc;
-            }
-            .description {
-                color: #94a3b8;
-            }
-        }
-        .filter-section {
-            border: 1px solid #e2e8f0;
-        }
-        .dark .filter-section {
-            border-color: #334155;
-        }
-        .category-tag {
-            transition: all 0.2s;
-            border: 1px solid #e2e8f0;
-            padding: 0 10px;
-            height: 28px;
-            line-height: 26px;
-            border-radius: 4px;
-            background: #f8fafc;
-        }
-        .dark .category-tag {
-            border-color: #334155;
-            background: #1e293b;
-            color: #e2e8f0;
-        }
-        .category-tag.selected {
-            background-color: #e0f2fe;
-            color: #0369a1;
-            border-color: #bae6fd;
-        }
-        .dark .category-tag.selected {
-            background-color: #0c4a6e;
-            color: #bae6fd;
-            border-color: #0ea5e9;
-        }
-        `
-    ]
+    }
 });
