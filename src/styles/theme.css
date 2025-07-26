@@ -7,6 +7,26 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+/* Extension popup environment - don't use overflow hidden or 100vh */
+.extension-popup html,
+.extension-popup body {
+    overflow: auto; /* 允许滚动，适应弹窗环境 */
+}
+
+.extension-popup #app {
+    height: auto; /* 自适应内容高度 */
+    width: 100%;
+    min-height: 400px; /* 确保最小高度 */
+    min-width: 320px;  /* 确保最小宽度 */
+    max-height: 600px; /* 限制最大高度，避免弹窗过大 */
+    overflow-y: auto;  /* 允许垂直滚动 */
+}
+
+/* 常规环境（非插件弹窗） */
+html:not(.extension-popup), 
+body:not(.extension-popup) {
     overflow: hidden; /* 防止双重滚动条 */
 }
 
@@ -16,6 +36,16 @@ html, body {
     min-height: 400px; /* 确保最小高度 */
     min-width: 320px;  /* 确保最小宽度 */
     overflow-y: auto;  /* 允许垂直滚动 */
+}
+
+/* 在插件环境中覆盖应用样式 */
+.extension-popup #app {
+    height: auto !important;
+    width: auto !important;
+    min-height: 400px;
+    min-width: 320px;
+    max-height: 600px;
+    overflow-y: auto;
 }
 
 /* Smooth scrolling */
