@@ -369,76 +369,78 @@ export default defineComponent({
         })
 
         return () => (
-            <div class="max-w-6xl mx-auto p-4 md:p-8 min-h-screen">
-                {/* 现代化的标题区域 */}
-                <div class="header-section bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 rounded-xl mb-8 p-8 border border-slate-200/50 dark:border-slate-700/50">
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                                <ElIcon size="24" class="text-white">
-                                    <Document />
-                                </ElIcon>
-                            </div>
-                            <div>
-                                <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent leading-tight">
-                                    ChatEDA-AcadBot
-                                </h1>
-                                <p class="text-slate-600 dark:text-slate-300 text-lg mt-1">
-                                    Conference Submission & Attendance Helper
-                                </p>
-                            </div>
+            <div class="w-full p-3 sm:p-4 md:p-6 lg:p-8 h-full mx-auto max-w-7xl">
+                {/* 自适应标题区域 */}
+                <div class="header-section bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 rounded-lg mb-4 p-4 sm:p-6 border border-slate-200/50 dark:border-slate-700/50">
+                    <div class="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center shadow-md">
+                            <ElIcon size="16" class="text-white">
+                                <Document />
+                            </ElIcon>
                         </div>
-                        <div class="hidden md:flex flex-col items-end text-right">
-                            <div class="text-sm text-slate-500 dark:text-slate-400 mb-1">
-                                Total Conferences
+                        <div class="flex-1 min-w-0">
+                            <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent leading-tight">
+                                ChatEDA-AcadBot
+                            </h1>
+                            <p class="text-slate-600 dark:text-slate-300 text-xs sm:text-sm md:text-base leading-tight">
+                                Conference Submission & Attendance Helper
+                            </p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                Total
                             </div>
-                            <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                            <div class="text-lg sm:text-xl md:text-2xl font-bold text-blue-600 dark:text-blue-400">
                                 {conferences.value.length}
                             </div>
                         </div>
                     </div>
                     
-                    <div class="flex flex-wrap gap-4 text-sm text-slate-600 dark:text-slate-300">
-                        <div class="flex items-center gap-2">
-                            <ElIcon class="text-green-600"><Check /></ElIcon>
-                            <span>Real-time Updates</span>
+                    <div class="flex flex-wrap gap-2 sm:gap-3 md:gap-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                        <div class="flex items-center gap-1 sm:gap-2">
+                            <ElIcon class="text-green-600 text-xs sm:text-sm"><Check /></ElIcon>
+                            <span class="hidden sm:inline">Real-time </span><span>Updates</span>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <ElIcon class="text-blue-600"><Star /></ElIcon>
-                            <span>Subscription Management</span>
+                        <div class="flex items-center gap-1 sm:gap-2">
+                            <ElIcon class="text-blue-600 text-xs sm:text-sm"><Star /></ElIcon>
+                            <span class="hidden sm:inline">Subscription </span><span>Management</span>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <ElIcon class="text-purple-600"><Timer /></ElIcon>
-                            <span>Deadline Tracking</span>
+                        <div class="flex items-center gap-1 sm:gap-2">
+                            <ElIcon class="text-purple-600 text-xs sm:text-sm"><Timer /></ElIcon>
+                            <span class="hidden sm:inline">Deadline </span><span>Tracking</span>
                         </div>
                     </div>
                 </div>
 
-                {/* Search and filter areas */}
-                <div class="filter-section bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200/50 dark:border-slate-700/50 mb-8">
-                    <div class="flex flex-col gap-6">
+                {/* 自适应筛选区域 */}
+                <div class="filter-section bg-white dark:bg-slate-800 rounded-lg p-3 sm:p-4 md:p-6 shadow-sm border border-slate-200/50 dark:border-slate-700/50 mb-4 sm:mb-6">
+                    <div class="flex flex-col gap-3 sm:gap-4 md:gap-6">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap-2">
-                                <ElIcon class="text-slate-600 dark:text-slate-400"><InfoFilled /></ElIcon>
-                                <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200">Filter & Search</h3>
+                                <ElIcon class="text-slate-600 dark:text-slate-400 hidden sm:block"><InfoFilled /></ElIcon>
+                                <h3 class="text-sm sm:text-base md:text-lg font-semibold text-slate-800 dark:text-slate-200">
+                                    <span class="sm:hidden">Filters</span>
+                                    <span class="hidden sm:inline">Filter & Search</span>
+                                </h3>
                             </div>
                             <ElButton
                                 type="text"
                                 size="small"
                                 onClick={toggleAllCategories}
-                                class="!text-sm !text-blue-600 dark:!text-blue-400 hover:!bg-blue-50 dark:hover:!bg-blue-900/20 !px-3 !py-1.5 !rounded-lg !font-medium"
+                                class="!text-xs sm:!text-sm !text-blue-600 dark:!text-blue-400 !px-2 !py-1 !rounded !font-medium"
                             >
-                                {selectedCategories.value.length === categoryOptions.length ? 'Deselect All' : 'Select All'}
+                                <span class="sm:hidden">{selectedCategories.value.length === categoryOptions.length ? 'Clear' : 'All'}</span>
+                                <span class="hidden sm:inline">{selectedCategories.value.length === categoryOptions.length ? 'Deselect All' : 'Select All'}</span>
                             </ElButton>
                         </div>
 
-                        <div class="flex flex-wrap gap-3">
+                        <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3 md:gap-4">
                             {categoryOptions.map(category => (
                                 <ElTag
                                     key={category}
-                                    class={`category-tag cursor-pointer transition-all duration-200 hover:scale-105 ${selectedCategories.value.includes(category) ? 'selected' : ''}`}
+                                    class={`category-tag cursor-pointer transition-all duration-200 text-center justify-center hover:scale-105 hover:z-10 relative ${selectedCategories.value.includes(category) ? 'selected' : ''}`}
                                     effect="plain"
-                                    size="large"
+                                    size="small"
                                     onClick={() => {
                                         if (selectedCategories.value.includes(category)) {
                                             selectedCategories.value = selectedCategories.value.filter(c => c !== category)
@@ -447,27 +449,30 @@ export default defineComponent({
                                         }
                                     }}
                                 >
-                                    <span class="font-medium">{category}</span>
+                                    <span class="text-xs sm:text-sm font-medium">
+                                        <span class="sm:hidden">{category.replace(' ', '\n')}</span>
+                                        <span class="hidden sm:inline">{category}</span>
+                                    </span>
                                     {selectedCategories.value.includes(category) && (
-                                        <ElIcon class="ml-2 text-green-600"><Check /></ElIcon>
+                                        <ElIcon class="ml-1 sm:ml-2 text-green-600 text-xs sm:text-sm"><Check /></ElIcon>
                                     )}
                                 </ElTag>
                             ))}
                         </div>
 
-                        <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center">
                             <ElInput
                                 v-model={searchQuery.value}
-                                placeholder="Search for conference ID, title, or description..."
-                                class="!max-w-md"
+                                placeholder="Search conferences..."
                                 clearable
                                 prefix-icon={Search}
-                                size="large"
+                                size="small"
+                                class="w-full sm:max-w-md text-sm"
                             />
                             
-                            <div class="text-sm text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg">
-                                <span class="font-medium text-blue-600 dark:text-blue-400">{selectedCategories.value.length}</span> categories selected, 
-                                <span class="font-medium text-green-600 dark:text-green-400 ml-1">{filteredConferences.value.length}</span> conferences found
+                            <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 text-center sm:text-left bg-slate-50 dark:bg-slate-700/50 px-2 sm:px-3 py-1 sm:py-1.5 rounded">
+                                <span class="font-medium text-blue-600 dark:text-blue-400">{selectedCategories.value.length}</span> categories, 
+                                <span class="font-medium text-green-600 dark:text-green-400 ml-1">{filteredConferences.value.length}</span> found
                             </div>
                         </div>
                     </div>
@@ -496,7 +501,7 @@ export default defineComponent({
                 ) : filteredConferences.value.length === 0 ? (
                     <ElEmpty description="No matching conferences found" />
                 ) : (
-                    <div class="space-y-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
                         {filteredConferences.value.map(conf => {
                             const latestYear = conf.years[0];
                             const daysRemaining = getDaysRemaining(latestYear.deadline);
@@ -509,23 +514,18 @@ export default defineComponent({
                             return (
                                 <ElCard
                                     key={conf.title}
-                                    class={`group transition-all duration-300 hover:scale-[1.02] hover:shadow-xl border-0 shadow-lg bg-gradient-to-br from-white to-slate-50/50 dark:from-slate-800 dark:to-slate-900/50 backdrop-blur-sm ${isConferenceOver ? 'opacity-60' : ''}`}
+                                    class={`group transition-all duration-300 hover:scale-[1.01] hover:shadow-xl border-0 shadow-lg bg-gradient-to-br from-white to-slate-50/50 dark:from-slate-800 dark:to-slate-900/50 backdrop-blur-sm ${isConferenceOver ? 'opacity-60' : ''}`}
                                     shadow="hover"
                                 >
                                     <div class="flex flex-col">
                                         {/* Conference title and status */}
-                                        <div class="flex justify-between items-start mb-6">
+                                        <div class="flex justify-between items-start mb-4 sm:mb-6">
                                             <div class="flex-1">
-                                                <div class="flex items-center gap-3 flex-wrap mb-3">
+                                                <div class="flex items-center gap-2 sm:gap-3 flex-wrap mb-3">
                                                     <div class="flex flex-col">
-                                                        {false && getConferenceId(conf) && (
-                                                            <span class="text-xs font-mono text-slate-500 dark:text-slate-400 mb-1 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded">
-                                                                {getConferenceId(conf)}
-                                                            </span>
-                                                        )}
-                                                        <h2 class={`text-2xl font-bold leading-tight ${isConferenceOver ? 'line-through text-slate-500' : 'text-slate-900 dark:text-white'}`}>
+                                                        <h2 class={`text-lg sm:text-xl md:text-2xl font-bold leading-tight ${isConferenceOver ? 'line-through text-slate-500' : 'text-slate-900 dark:text-white'}`}>
                                                             {conf.title} 
-                                                            <span class="text-blue-600 dark:text-blue-400 ml-2 font-semibold">
+                                                            <span class="text-blue-600 dark:text-blue-400 ml-1 sm:ml-2 font-semibold">
                                                                 {latestYear.year}
                                                             </span>
                                                         </h2>
@@ -533,7 +533,7 @@ export default defineComponent({
                                                 </div>
                                                 
                                                 <div class="flex items-center gap-2 flex-wrap mb-3">
-                                                    <ElTag type={statusType} size="large" effect="dark" class="px-3 py-1 font-medium">
+                                                    <ElTag type={statusType} size="large" effect="dark" class="px-2 sm:px-3 py-1 font-medium">
                                                         {statusText}
                                                     </ElTag>
                                                     <ElTag type="info" size="default" effect="plain" class="bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700/50">
@@ -546,34 +546,35 @@ export default defineComponent({
                                                     )}
                                                 </div>
                                                 
-                                                <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                                                <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
                                                     {conf.description}
                                                 </p>
                                             </div>
-                                            <div class="flex items-center gap-2 ml-4">
+                                            <div class="flex items-center gap-2 ml-2 sm:ml-4">
                                                 <ElButton
                                                     type={isSubscribed ? 'success' : 'primary'}
                                                     size="default"
                                                     onClick={() => handleSubscription(conf, latestYear)}
-                                                    class="px-4 py-2 font-medium shadow-md hover:shadow-lg transition-all duration-200"
+                                                    class="px-3 sm:px-4 py-2 font-medium shadow-md hover:shadow-lg transition-all duration-200"
                                                 >
-                                                    <ElIcon class="mr-2">
-                                                        {isSubscribed ? <Star /> : <Star />}
+                                                    <ElIcon class="mr-1 sm:mr-2">
+                                                        <Star />
                                                     </ElIcon>
-                                                    {isSubscribed ? 'Subscribed' : 'Subscribe'}
+                                                    <span class="hidden sm:inline">{isSubscribed ? 'Subscribed' : 'Subscribe'}</span>
+                                                    <span class="sm:hidden">{isSubscribed ? 'Sub' : 'Sub'}</span>
                                                 </ElButton>
                                             </div>
                                         </div>
 
                                         {/* Conference details */}
-                                        <div class="bg-gradient-to-r from-slate-50/80 to-blue-50/30 dark:from-slate-800/50 dark:to-slate-700/30 rounded-xl p-5 mb-6 border border-slate-200/50 dark:border-slate-600/30">
-                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div class="bg-gradient-to-r from-slate-50/80 to-blue-50/30 dark:from-slate-800/50 dark:to-slate-700/30 rounded-xl p-4 sm:p-5 mb-4 sm:mb-6 border border-slate-200/50 dark:border-slate-600/30">
+                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                                                 <div class="space-y-3">
-                                                    <div class="flex items-center gap-3">
-                                                        <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center">
+                                                    <div class="flex items-start gap-3">
+                                                        <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center flex-shrink-0">
                                                             <ElIcon class="text-blue-600 dark:text-blue-400"><Calendar /></ElIcon>
                                                         </div>
-                                                        <div>
+                                                        <div class="flex-1 min-w-0">
                                                             <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Conference Date:</span>
                                                             <div class="text-base font-semibold text-slate-900 dark:text-white">{formatDate(latestYear.date)}</div>
                                                             {isUpcoming(latestYear.date) && (
@@ -584,21 +585,21 @@ export default defineComponent({
                                                         </div>
                                                     </div>
 
-                                                    <div class="flex items-center gap-3">
-                                                        <div class="w-8 h-8 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center">
+                                                    <div class="flex items-start gap-3">
+                                                        <div class="w-10 h-10 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center flex-shrink-0">
                                                             <ElIcon class="text-green-600 dark:text-green-400"><MapLocation /></ElIcon>
                                                         </div>
-                                                        <div>
+                                                        <div class="flex-1 min-w-0">
                                                             <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Location:</span>
                                                             <div class="text-base font-semibold text-slate-900 dark:text-white">{latestYear.place}</div>
                                                         </div>
                                                     </div>
 
-                                                    <div class="flex items-center gap-3">
-                                                        <div class={`w-8 h-8 ${isDeadlineOver ? 'bg-red-100 dark:bg-red-900/50' : 'bg-orange-100 dark:bg-orange-900/50'} rounded-lg flex items-center justify-center`}>
+                                                    <div class="flex items-start gap-3">
+                                                        <div class={`w-10 h-10 ${isDeadlineOver ? 'bg-red-100 dark:bg-red-900/50' : 'bg-orange-100 dark:bg-orange-900/50'} rounded-lg flex items-center justify-center flex-shrink-0`}>
                                                             <ElIcon class={isDeadlineOver ? 'text-red-600 dark:text-red-400' : 'text-orange-600 dark:text-orange-400'}><Clock /></ElIcon>
                                                         </div>
-                                                        <div>
+                                                        <div class="flex-1 min-w-0">
                                                             <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Submission Deadline:</span>
                                                             <div class={`text-base font-semibold ${isDeadlineOver ? 'text-red-600 dark:text-red-400 line-through' : 'text-slate-900 dark:text-white'}`}>
                                                                 {formatDate(latestYear.deadline)}
@@ -616,23 +617,25 @@ export default defineComponent({
                                                     </div>
                                                 </div>
                                                 <div class="space-y-3">
-                                                    <div class="flex items-center gap-3">
-                                                        <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center">
+                                                    <div class="flex items-start gap-3">
+                                                        <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center flex-shrink-0">
                                                             <ElIcon class="text-purple-600 dark:text-purple-400"><Document /></ElIcon>
                                                         </div>
-                                                        <div>
+                                                        <div class="flex-1 min-w-0">
                                                             <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Abstract Deadline:</span>
                                                             <div class="text-base font-semibold text-slate-900 dark:text-white">
                                                                 {latestYear.abstractDeadline ? formatDate(latestYear.abstractDeadline) : 'Not specified'}
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="flex items-center gap-3">
-                                                        <div class="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/50 rounded-lg flex items-center justify-center">
-                                                            <ElIcon class="text-indigo-600 dark:text-indigo-400"><InfoFilled /></ElIcon>
-                                                        </div>
-                                                        <div>
-                                                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Timeline:</span>
+                                                    
+                                                    {/* Timeline */}
+                                                    <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
+                                                        <h4 class="text-sm font-medium mb-3 flex items-center">
+                                                            <ElIcon class="mr-1"><InfoFilled /></ElIcon>
+                                                            Important Dates
+                                                        </h4>
+                                                        <div class="space-y-2">
                                                             <ElTimeline>
                                                                 {latestYear.abstractDeadline && (
                                                                     <ElTimelineItem
@@ -666,7 +669,7 @@ export default defineComponent({
                                                                     hollow={!isDatePassed(latestYear.date)}
                                                                 >
                                                                     <p class={`text-sm ${isDatePassed(latestYear.date) ? 'opacity-70' : ''}`}>
-                                                                        <span class="font-medium">Conference Time:</span>{' '}
+                                                                        <span class="font-medium">Conference Date:</span>{' '}
                                                                         <span class={isDatePassed(latestYear.date) ? 'line-through' : ''}>
                                                                             {formatDate(latestYear.date)}
                                                                         </span>
@@ -693,39 +696,13 @@ export default defineComponent({
                                                             </ElTimeline>
                                                         </div>
                                                     </div>
-                                                    <div class="flex items-center gap-3">
-                                                        <div class="w-8 h-8 bg-teal-100 dark:bg-teal-900/50 rounded-lg flex items-center justify-center">
-                                                            <ElIcon class="text-teal-600 dark:text-teal-400"><Link /></ElIcon>
-                                                        </div>
-                                                        <div>
-                                                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">Official Site:</span>
-                                                            {latestYear.link && (
-                                                                <a href={latestYear.link} target="_blank" rel="noopener noreferrer" class="text-base font-semibold text-slate-900 dark:text-white hover:underline">
-                                                                    {latestYear.link}
-                                                                </a>
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex items-center gap-3">
-                                                        <div class="w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
-                                                            <ElIcon class="text-gray-600 dark:text-gray-400"><Document /></ElIcon>
-                                                        </div>
-                                                        <div>
-                                                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300">DBLP:</span>
-                                                            {conf.dblp && (
-                                                                <a href={`https://dblp.org/db/conf/${conf.dblp}/index.html`} target="_blank" rel="noopener noreferrer" class="text-base font-semibold text-slate-900 dark:text-white hover:underline">
-                                                                    {conf.dblp}
-                                                                </a>
-                                                            )}
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         {/* Action Button */}
                                         <div class="flex justify-between items-center pt-4 border-t border-slate-200/50 dark:border-slate-700/50">
-                                            <div class="flex items-center gap-3">
+                                            <div class="flex items-center gap-2 sm:gap-3">
                                                 {latestYear.link && (
                                                     <ElButton
                                                         type="primary"
@@ -733,8 +710,9 @@ export default defineComponent({
                                                         onClick={() => window.open(latestYear.link, '_blank')}
                                                         class="shadow-md hover:shadow-lg transition-all duration-200"
                                                     >
-                                                        <ElIcon class="mr-2"><Link /></ElIcon>
-                                                        Official Site
+                                                        <ElIcon class="mr-1 sm:mr-2"><Link /></ElIcon>
+                                                        <span class="hidden sm:inline">Official Site</span>
+                                                        <span class="sm:hidden">Site</span>
                                                     </ElButton>
                                                 )}
                                                 {conf.dblp && (
@@ -744,14 +722,15 @@ export default defineComponent({
                                                         onClick={() => window.open(`https://dblp.org/db/conf/${conf.dblp}/index.html`, '_blank')}
                                                         class="shadow-md hover:shadow-lg transition-all duration-200"
                                                     >
-                                                        <ElIcon class="mr-2"><Document /></ElIcon>
+                                                        <ElIcon class="mr-1 sm:mr-2"><Document /></ElIcon>
                                                         DBLP
                                                     </ElButton>
                                                 )}
                                             </div>
-                                            <div class="text-sm text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-700/50 px-3 py-1.5 rounded-lg">
+                                            <div class="text-sm text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-700/50 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg">
                                                 <ElIcon class="mr-1 text-xs"><Timer /></ElIcon>
-                                                Last Updated: {new Date().toLocaleDateString()}
+                                                <span class="hidden sm:inline">Last Updated: </span>
+                                                {new Date().toLocaleDateString()}
                                             </div>
                                         </div>
                                     </div>
