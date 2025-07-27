@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+/* Custom styles for ChatEDA-AcadBot */
+
+/* Plugin environment optimizations */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Extension popup environment - don't use overflow hidden or 100vh */
+.extension-popup html,
+.extension-popup body {
+    overflow: auto;
+    /* Allow scrolling and adapt to pop-up environment */
+}
+
+.extension-popup #app {
+    height: auto;
+    /* Adaptive content height */
+    width: 100%;
+    min-height: 400px;
+    /* Ensure minimum height */
+    min-width: 320px;
+    /* Ensure minimum width */
+    max-height: 600px;
+    /* Limit the maximum height to avoid pop-ups being too large */
+    overflow-y: auto;
+    /* Allow vertical scrolling */
+}
+
+/* Normal environment (non-plugin pop-up window) */
+html:not(.extension-popup),
+body:not(.extension-popup) {
+    overflow: hidden;
+    /* Prevent double scrollbars */
+}
+
+#app {
+    height: 100vh;
+    /* Use viewport height */
+    width: 100vw;
+    /* Use viewport width */
+    min-height: 400px;
+    /* Ensure minimum height */
+    min-width: 320px;
+    /* Ensure minimum width */
+    overflow-y: auto;
+    /* Allow vertical scrolling */
+}
+
+/* Override application styles in plugin context */
+.extension-popup #app {
+    height: auto !important;
+    width: auto !important;
+    min-height: 400px;
+    min-width: 320px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar - responsive width */
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+@media (min-width: 640px) {
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+}
+
+@media (min-width: 1024px) {
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: #475569;
+}
+
+/* Focus styles */
+*:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Glass effect for cards */
+.glass-effect {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass-effect {
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid rgba(51, 65, 85, 0.3);
+}
+
+/* Text truncation for all screen sizes */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Category tags - responsive */
+.category-tag {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    transition: all 0.2s ease;
+    margin: 2px;
+    /* Add margins to ensure room for enlargement */
+}
+
+.category-tag:hover {
+    transform: scale(1.05);
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dark .category-tag:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.category-tag.selected {
+    background-color: #e0f2fe !important;
+    color: #0369a1 !important;
+    border-color: #bae6fd !important;
+}
+
+.dark .category-tag.selected {
+    background-color: #0c4a6e !important;
+    color: #bae6fd !important;
+    border-color: #0ea5e9 !important;
+}
+
+.category-tag.selected:hover {
+    background-color: #0ea5e9 !important;
+    color: white !important;
+    border-color: #0284c7 !important;
+}
+
+.dark .category-tag.selected:hover {
+    background-color: #0ea5e9 !important;
+    color: white !important;
+    border-color: #0284c7 !important;
+}
+
+/* Responsive grid optimizations */
+@media (max-width: 640px) {
+
+    /* Small screen specific adjustments */
+    .category-tag {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+
+    /* Large screen optimizations */
+    .grid-conference-cards {
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    }
+}
+
+@media (min-width: 1280px) {
+
+    /* Extra large screen optimizations */
+    .grid-conference-cards {
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    }
+}
