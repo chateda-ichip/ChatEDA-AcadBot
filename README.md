@@ -73,7 +73,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 **Empowering smarter academic conference management—join us**
 
 ---
-
-## Follow Us
-
-For more insights, discussions, and updates on EDA and academic conferences, follow our WeChat public account: **EDA茶话会**.
