@@ -37,7 +37,7 @@ ChatEDA-AcadBot is a modern plugin designed for academic conference submission, 
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-org/ChatEDA-AcadBot.git
+   git clone git@github.com:chateda-ichip/ChatEDA-AcadBot.git
    cd ChatEDA-AcadBot
    ```
 2. **Install dependencies**
