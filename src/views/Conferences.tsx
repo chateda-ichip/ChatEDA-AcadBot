@@ -377,7 +377,7 @@ export default defineComponent({
 
         return () => (
             <div class="w-full p-3 sm:p-4 md:p-6 lg:p-8 h-full mx-auto max-w-7xl">
-                {/* 自适应标题区域 */}
+                {/* Adaptive title area */}
                 <div class="header-section bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 rounded-lg mb-4 p-4 sm:p-6 border border-slate-200/50 dark:border-slate-700/50">
                     <div class="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
                         <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center shadow-md">
@@ -419,7 +419,7 @@ export default defineComponent({
                     </div>
                 </div>
 
-                {/* 自适应筛选区域 */}
+                {/* Adaptive filter area */}
                 <div class="filter-section bg-white dark:bg-slate-800 rounded-lg p-3 sm:p-4 md:p-6 shadow-sm border border-slate-200/50 dark:border-slate-700/50 mb-4 sm:mb-6">
                     <div class="flex flex-col gap-3 sm:gap-4 md:gap-6">
                         <div class="flex items-center justify-between">

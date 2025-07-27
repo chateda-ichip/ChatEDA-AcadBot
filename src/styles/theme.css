@@ -3,7 +3,8 @@
 /* Custom styles for ChatEDA-AcadBot */
 
 /* Plugin environment optimizations */
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -12,33 +13,45 @@ html, body {
 /* Extension popup environment - don't use overflow hidden or 100vh */
 .extension-popup html,
 .extension-popup body {
-    overflow: auto; /* 允许滚动，适应弹窗环境 */
+    overflow: auto;
+    /* Allow scrolling and adapt to pop-up environment */
 }
 
 .extension-popup #app {
-    height: auto; /* 自适应内容高度 */
+    height: auto;
+    /* Adaptive content height */
     width: 100%;
-    min-height: 400px; /* 确保最小高度 */
-    min-width: 320px;  /* 确保最小宽度 */
-    max-height: 600px; /* 限制最大高度，避免弹窗过大 */
-    overflow-y: auto;  /* 允许垂直滚动 */
+    min-height: 400px;
+    /* Ensure minimum height */
+    min-width: 320px;
+    /* Ensure minimum width */
+    max-height: 600px;
+    /* Limit the maximum height to avoid pop-ups being too large */
+    overflow-y: auto;
+    /* Allow vertical scrolling */
 }
 
-/* 常规环境（非插件弹窗） */
-html:not(.extension-popup), 
+/* Normal environment (non-plugin pop-up window) */
+html:not(.extension-popup),
 body:not(.extension-popup) {
-    overflow: hidden; /* 防止双重滚动条 */
+    overflow: hidden;
+    /* Prevent double scrollbars */
 }
 
 #app {
-    height: 100vh; /* 使用viewport高度 */
-    width: 100vw;   /* 使用viewport宽度 */
-    min-height: 400px; /* 确保最小高度 */
-    min-width: 320px;  /* 确保最小宽度 */
-    overflow-y: auto;  /* 允许垂直滚动 */
+    height: 100vh;
+    /* Use viewport height */
+    width: 100vw;
+    /* Use viewport width */
+    min-height: 400px;
+    /* Ensure minimum height */
+    min-width: 320px;
+    /* Ensure minimum width */
+    overflow-y: auto;
+    /* Allow vertical scrolling */
 }
 
-/* 在插件环境中覆盖应用样式 */
+/* Override application styles in plugin context */
 .extension-popup #app {
     height: auto !important;
     width: auto !important;
@@ -123,7 +136,8 @@ html {
     text-overflow: ellipsis;
     min-width: 0;
     transition: all 0.2s ease;
-    margin: 2px; /* 添加边距确保有放大空间 */
+    margin: 2px;
+    /* Add margins to ensure room for enlargement */
 }
 
 .category-tag:hover {
@@ -162,6 +176,7 @@ html {
 
 /* Responsive grid optimizations */
 @media (max-width: 640px) {
+
     /* Small screen specific adjustments */
     .category-tag {
         font-size: 0.7rem;
@@ -170,6 +185,7 @@ html {
 }
 
 @media (min-width: 1024px) {
+
     /* Large screen optimizations */
     .grid-conference-cards {
         grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -177,6 +193,7 @@ html {
 }
 
 @media (min-width: 1280px) {
+
     /* Extra large screen optimizations */
     .grid-conference-cards {
         grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
