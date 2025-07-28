@@ -53,7 +53,8 @@ export default defineConfig({
                 {
                     src: 'public/icons',
                     dest: ''
-l                {
+                },
+                {
                     src: 'public/background.js',
                     dest: ''
                 }
